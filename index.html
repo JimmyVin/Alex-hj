@@ -1,1 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hoja de Vida Profesional</title>
 
+<style>
+/* =========================================================
+   VARIABLES GLOBALES
+========================================================= */
+:root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --text:#1d2939;
+    --muted:#667085;
+    --primary:#2563eb;
+    --secondary:#0f172a;
+    --border:#e4e7ec;
+    --shadow:0 10px 30px rgba(0,0,0,.08);
+    --gradient:linear-gradient(135deg,#2563eb,#7c3aed);
+}
+
+body.dark{
+    --bg:#0f172a;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --primary:#60a5fa;
+    --secondary:#e2e8f0;
+    --border:#1e293b;
+    --shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:.4s ease;
+    line-height:1.6;
+}
+
+/* =========================================================
+   BOTONES SUPERIORES
+========================================================= */
+.top-actions{
+    position:fixed;
+    top:20px;
+    right:20px;
+    display:flex;
+    gap:10px;
+    z-index:999;
+}
+
+.btn{
+    border:none;
+    outline:none;
+    padding:12px 18px;
+    border-radius:12px;
+    background:var(--gradient);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s ease;
+    box-shadow:var(--shadow);
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    opacity:.95;
+}
+
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+========================================================= */
+.cv-container{
+    width:100%;
+    max-width:1400px;
+    margin:40px auto;
+    background:var(--card);
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    display:grid;
+    grid-template-columns:340px 1fr;
+    animation:fadeIn 1s ease;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+.sidebar{
+    background:var(--gradient); 
+    color:white;
+    padding:40px 30px;
+    position:relative;
+}
+
+.profile{
+    text-align:center;
+}
+
+.profile img{
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    object-fit:cover;
+    border:6px solid rgba(255,255,255,.2);
+    margin-bottom:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+.profile h1{
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+.profile h2{
+    font-size:16px;
+    font-weight:400;
+    opacity:.9;
+    margin-bottom:20px;
+}
+
+.section-title{
+    margin:35px 0 15px;
+    font-size:18px;
+    position:relative;
+    padding-bottom:8px;
+}
+
+.section-title::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:45px;
+    height:3px;
+    background:white;
+    border-radius:10px;
+}
+
+.contact-item,
+.skill-item,
+.lang-item{
+    margin-bottom:18px;
+}
+
+.contact-item span{
+    display:block;
+    font-size:14px;
+    opacity:.9;
+    word-break:break-word;
+}
+
+.sidebar small{
+    opacity:.8;
+}
+
+/* =========================================================
+   SKILLS
+========================================================= */
+.skill{
+    margin-bottom:18px;
+}
+
+.skill p{
+    margin-bottom:6px;
+    font-size:14px;
+}
+
+.skill-bar{
+    width:100%;
+    height:10px;
+    background:rgba(255,255,255,.2);
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.skill-fill{
+    height:100%;
+    width:0;
+    background:white;
+    border-radius:20px;
+    transition:2s ease;
+}
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+.main{
+    padding:50px;
+    background:var(--bg);
+}
+
+.card{
+    background:var(--card);
+    border-radius:22px;
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--border);
+    transition:.3s ease;
+    animation:slideUp .8s ease;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    margin-bottom:20px;
+    font-size:22px;
+    color:var(--primary);
+}
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+.timeline{
+    position:relative;
+    padding-left:30px;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:7px;
+    top:0;
+    width:3px;
+    height:100%;
+    background:var(--primary);
+}
+
+.timeline-item{
+    position:relative;
+    margin-bottom:30px;
+}
+
+.timeline-item::before{
+    content:"";
+    position:absolute;
+    left:-28px;
+    top:5px;
+    width:16px;
+    height:16px;
+    background:var(--primary);
+    border-radius:50%;
+}
+
+.timeline-item h4{
+    font-size:18px;
+}
+
+.timeline-item span{
+    font-size:14px;
+    color:var(--muted);
+}
+
+/* =========================================================
+   GRID
+========================================================= */
+.grid-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* =========================================================
+   BADGES
+========================================================= */
+.badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.badge{
+    background:rgba(37,99,235,.1);
+    color:var(--primary);
+    padding:10px 15px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+}
+
+/* =========================================================
+   ANIMACIONES
+========================================================= */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes slideUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media(max-width:1000px){
+    .cv-container{
+        grid-template-columns:1fr;
+    }
+
+    .main{
+        padding:25px;
+    }
+
+    .grid-2{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+    .top-actions{
+        position:relative;
+        top:0;
+        right:0;
+        justify-content:center;
+        margin:20px;
+        flex-wrap:wrap;
+    }
+
+    .sidebar{
+        padding:30px 20px;
+    }
+
+    .main{
+        padding:20px;
+    }
+}
+
+/* =========================================================
+   IMPRESIÓN PDF
+========================================================= */
+@media print{
+
+    body{
+        background:white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .top-actions{
+        display:none !important;
+    }
+
+    .cv-container{
+        margin:0; 
+        width:100%;
+        max-width:100%;
+        box-shadow:none;
+        border-radius:0;
+        page-break-inside:avoid;
+    }
+
+    .card{
+        box-shadow:none !important;
+        page-break-inside:avoid;
+    }
+
+    .sidebar{
+        background:linear-gradient(135deg,#2563eb,#7c3aed) !important; 
+        color:white !important;
+    }
+
+    @page{
+        size:A4;
+        margin:10mm;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     BOTONES
+========================================================= -->
+<div class="top-actions">
+    <button class="btn" onclick="window.print()">🖨 Imprimir CV</button>
+    <button class="btn" onclick="downloadPDF()">⬇ Descargar PDF</button>
+    <button class="btn" onclick="toggleTheme()">🌙 Tema</button>
+</div>
+
+<!-- =========================================================
+     CV
+========================================================= -->
+<div class="main">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+    <aside class="card">
+
+        <div class="profile">
+         <img src="./" alt="Perfil"> 
+            <h1>Alex Vinueza Villaicis</h1>
+            <h2>Chofer Profesional • Diseñador • Plomero</h2>
+        </div>
+
+        <!-- CONTACTO -->
+        <h3 class="section-title">Contacto</h3>
+
+        <div class="contact-item">
+            <strong>📞 Teléfono</strong>
+            <span>0939935044</span>
+        </div>
+
+        <div class="contact-item">
+            <strong>📧 Correo</strong>
+            <span>vinuezoalex76@gmail.com</span>
+        </div>
+
+        <div class="contact-item">
+            <strong>📍 Ubicación</strong>
+            <span>San Sebastian, 5 de Junio S2-25 y Francisco Quijano</span>
+        </div>
+/*
+        <div class="contact-item">
+            <strong>💼 LinkedIn</strong>
+            <span>linkedin.com/in/alexvinueza</span>
+        </div>
+
+        <div class="contact-item">
+            <strong>💻 GitHub</strong>
+            <span>github.com/alexvinueza</span>
+        </div>
+*/
+        <!-- HABILIDADES -->
+        <h3 class="section-title">Habilidades Técnicas</h3>
+
+        <div class="skill">
+            <p>Conducción Profesional</p>
+            <div class="skill-bar">
+                <div class="skill-fill" data-width="95%"></div>
+            </div>
+        </div>
+
+        <div class="skill">
+            <p>Plomería</p>
+            <div class="skill-bar">
+                <div class="skill-fill" data-width="88%"></div>
+            </div>
+        </div>
+
+        <div class="skill">
+            <p>Diseño de Mochilas</p>
+            <div class="skill-bar">
+                <div class="skill-fill" data-width="80%"></div>
+            </div>
+        </div>
+
+        <!-- IDIOMAS -->
+        <h3 class="section-title">Idiomas</h3>
+
+        <div class="lang-item">
+            <strong>Español</strong>
+            <small> — Nativo</small>
+        </div>
+
+        <div class="lang-item">
+            <strong>Inglés</strong>
+            <small> — Básico</small>
+        </div>
+
+        <!-- CERTIFICACIONES -->
+        <h3 class="section-title">Certificaciones</h3>
+
+        <div class="contact-item">
+            <span>✔ Licencia Profesional</span>
+        </div>
+
+        <div class="contact-item">
+            <span>✔ Capacitación en Servicio Técnico</span>
+        </div>
+
+    </aside>
+
+    <!-- =====================================================
+         CONTENIDO
+    ====================================================== -->
+    <main class="main">
+
+        <!-- PERFIL -->
+        <section class="card">
+            <h3>Perfil Profesional</h3>
+            <p>
+                Profesional ecuatoriano con experiencia en conducción, diseño y trabajos técnicos.
+                Responsable, puntual y orientado a resultados. Capacidad para resolver problemas,
+                trabajar bajo presión y brindar un servicio eficiente y profesional.
+            </p>
+        </section>
+
+        <!-- EXPERIENCIA -->
+        <section class="card">
+            <h3>Experiencia Laboral</h3>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <h4>Chofer Profesional</h4>
+                    <span>2015 - Actualidad</span>
+                    <p>
+                        Transporte seguro de pasajeros y mercadería, cumplimiento de rutas y mantenimiento básico vehicular.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Diseñador de Mochilas</h4>
+                    <span>2010 - 2015</span>
+                    <p>
+                        Diseño y fabricación de mochilas personalizadas, control de calidad y atención al cliente.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Plomero</h4>
+                    <span>2005 - 2010</span>
+                    <p>
+                        Instalación y mantenimiento de sistemas hidráulicos y reparación de tuberías.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- EDUCACIÓN -->
+        <section class="card">
+            <h3>Educación</h3>
+
+            <div class="grid-2">
+
+                <div>
+                    <h4>Educación Secundaria</h4>
+                    <span>Bachillerato General</span>
+                </div>
+
+                <div>
+                    <h4>Cursos Técnicos</h4>
+                    <span>Capacitación Profesional</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- HABILIDADES BLANDAS -->
+        <section class="card">
+            <h3>Habilidades Blandas</h3>
+
+            <div class="badges">
+                <div class="badge">Trabajo en equipo</div>
+                <div class="badge">Responsabilidad</div>
+                <div class="badge">Comunicación</div>
+                <div class="badge">Resolución de problemas</div>
+                <div class="badge">Puntualidad</div>
+                <div class="badge">Adaptabilidad</div>
+            </div>
+        </section>
+
+        <!-- PROYECTOS -->
+        <section class="card">
+            <h3>Proyectos</h3>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <h4>Diseño Personalizado de Mochilas</h4>
+                    <p>
+                        Creación de modelos personalizados para clientes locales con materiales resistentes y diseños modernos.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>Servicios Técnicos Independientes</h4>
+                    <p>
+                        Trabajos de plomería y mantenimiento residencial realizados de forma independiente.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- REFERENCIAS -->
+        <section class="card">
+            <h3>Referencias Personales</h3>
+
+            <div class="grid-2">
+
+                <div>
+                    <h4>Luis Alberto Cazor</h4>
+                    <p>📞 0962589417</p>
+                    <p>📧 luiscazor128@hotmail.com</p>
+                </div>
+
+                <div>
+                    <h4>Referencia Profesional</h4>
+                    <p>Disponible bajo solicitud.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- DATOS EXTRA -->
+        <section class="card">
+            <h3>Información Personal</h3>
+
+            <div class="grid-2">
+
+                <div>
+                    <strong>Fecha de Nacimiento:</strong>
+                    <p>14 de Marzo de 1974</p>
+                </div>
+
+                <div>
+                    <strong>Nacionalidad:</strong>
+                    <p>Ecuatoriana</p>
+                </div>
+
+                <div>
+                    <strong>Género:</strong>
+                    <p>Hombre</p>
+                </div>
+
+                <div>
+                    <strong>Cédula:</strong>
+                    <p>1715074322</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+<script>
+
+/* =========================================================
+   ANIMACIÓN DE BARRAS
+========================================================= */
+window.addEventListener("load",()=>{
+
+    const skills = document.querySelectorAll(".skill-fill");
+
+    skills.forEach(skill=>{
+        let width = skill.getAttribute("data-width");
+        setTimeout(()=>{
+            skill.style.width = width;
+        },500);
+    });
+
+});
+
+/* =========================================================
+   DESCARGAR PDF
+========================================================= */
+function downloadPDF(){
+    window.print();
+}
+
+/* =========================================================
+   CAMBIO DE TEMA
+========================================================= */
+function toggleTheme(){
+    document.body.classList.toggle("dark");
+}
+
+/* =========================================================
+   APARICIÓN PROGRESIVA
+========================================================= */
+const cards = document.querySelectorAll(".card");
+
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.style.opacity="1";
+            entry.target.style.transform="translateY(0)";
+        }
+    });
+},{
+    threshold:0.1
+});
+
+cards.forEach(card=>{
+    card.style.opacity="0";
+    card.style.transform="translateY(20px)";
+    card.style.transition=".7s ease";
+    observer.observe(card);
+});
+
+</script>
+
+</body>
+</html>
